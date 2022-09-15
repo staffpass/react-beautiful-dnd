@@ -4647,7 +4647,8 @@ var getDroppableScrollChange = (function (_ref) {
 
 var timerId = null;
 var scrollStarted = false;
-var currentDroppableId = null;
+var currentScrollableHeight = null;
+var currentScrollableWidth = null;
 var scroll$1 = (function (_ref) {
   var state = _ref.state,
       dragStartTime = _ref.dragStartTime,
@@ -4693,15 +4694,17 @@ var scroll$1 = (function (_ref) {
     shouldUseTimeDampening: shouldUseTimeDampening
   });
 
-  if (currentDroppableId && currentDroppableId !== droppable.descriptor.id || !change) {
+  if (currentScrollableWidth && currentScrollableHeight && (currentScrollableWidth !== droppable.frame.scrollSize.scrollWidth || currentScrollableHeight !== droppable.frame.scrollSize.scrollHeight) || !change) {
     window.clearTimeout(timerId);
     timerId = null;
-    currentDroppableId = null;
+    currentScrollableWidth = null;
+    currentScrollableHeight = null;
     scrollStarted = false;
   }
 
   if (change && !timerId) {
-    currentDroppableId = droppable.descriptor.id;
+    currentScrollableWidth = droppable.frame.scrollSize.scrollWidth;
+    currentScrollableHeight = droppable.frame.scrollSize.scrollHeight;
     timerId = window.setTimeout(function () {
       scrollStarted = true;
       scrollDroppable(droppable.descriptor.id, change);
