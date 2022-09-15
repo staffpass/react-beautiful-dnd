@@ -35,6 +35,7 @@ export default ({
     }
 
     if (state.movementMode === 'FLUID') {
+      console.log('fluid scroll');
       fluidScroller.scroll(state);
       return;
     }
@@ -42,6 +43,8 @@ export default ({
     if (!state.scrollJumpRequest) {
       return;
     }
+
+    console.log('jump scroll');
 
     jumpScroll(state);
   };
