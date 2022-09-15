@@ -5,6 +5,7 @@ import createJumpScroller, { type JumpScroller } from './jump-scroller';
 import type { AutoScroller } from './auto-scroller-types';
 import type { DroppableId, State } from '../../types';
 import type { MoveArgs } from '../action-creators';
+import {invariant} from "../../invariant";
 
 export type Args = {|
   scrollWindow: (offset: Position) => void,
@@ -35,7 +36,6 @@ export default ({
     }
 
     if (state.movementMode === 'FLUID') {
-      console.log('fluid scroll');
       fluidScroller.scroll(state);
       return;
     }
@@ -44,7 +44,7 @@ export default ({
       return;
     }
 
-    console.log('jump scroll');
+    invariant(false, 'Jump scroll requested');
 
     jumpScroll(state);
   };
