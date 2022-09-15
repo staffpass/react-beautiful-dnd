@@ -1,5 +1,6 @@
 // @flow
 import type { BoxModel, Rect, Position } from 'css-box-model';
+import type { AutoScrollConfig } from './state/auto-scroller/fluid-scroller/config';
 
 export type Id = string;
 export type DraggableId = Id;
@@ -13,6 +14,7 @@ export type DroppableDescriptor = {|
   id: DroppableId,
   type: TypeId,
   mode: DroppableMode,
+  autoScrollConfig: AutoScrollConfig,
 |};
 
 export type DraggableDescriptor = {|

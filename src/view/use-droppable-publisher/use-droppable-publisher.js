@@ -32,6 +32,7 @@ import useRequiredContext from '../use-required-context';
 import usePreviousRef from '../use-previous-ref';
 import useLayoutEffect from '../use-isomorphic-layout-effect';
 import useUniqueId from '../use-unique-id';
+import config from '../../state/auto-scroller/fluid-scroller/config';
 
 type Props = {|
   droppableId: DroppableId,
@@ -66,8 +67,12 @@ export default function useDroppablePublisher(args: Props) {
       id: args.droppableId,
       type: args.type,
       mode: args.mode,
+      autoScrollConfig: {
+        ...config,
+        ...args.autoScrollConfig,
+      },
     }),
-    [args.droppableId, args.mode, args.type],
+    [args.droppableId, args.mode, args.type, args.autoScrollConfig],
   );
   const publishedDescriptorRef = useRef<DroppableDescriptor>(descriptor);
 

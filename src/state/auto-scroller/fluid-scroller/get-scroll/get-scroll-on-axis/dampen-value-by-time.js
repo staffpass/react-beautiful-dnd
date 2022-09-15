@@ -1,12 +1,15 @@
 // @flow
 import getPercentage from '../../get-percentage';
-import config from '../../config';
 import minScroll from './min-scroll';
+import { type AutoScrollConfig } from '../../config';
 
-const accelerateAt: number = config.durationDampening.accelerateAt;
-const stopAt: number = config.durationDampening.stopDampeningAt;
-
-export default (proposedScroll: number, dragStartTime: number): number => {
+export default (
+  proposedScroll: number,
+  dragStartTime: number,
+  config: AutoScrollConfig,
+): number => {
+  const accelerateAt: number = config.durationDampening.accelerateAt;
+  const stopAt: number = config.durationDampening.stopDampeningAt;
   const startOfRange: number = dragStartTime;
   const endOfRange: number = stopAt;
   const now: number = Date.now();

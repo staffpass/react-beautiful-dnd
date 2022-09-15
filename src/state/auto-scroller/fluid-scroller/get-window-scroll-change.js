@@ -3,6 +3,7 @@ import type { Position, Rect } from 'css-box-model';
 import type { Viewport } from '../../../types';
 import getScroll from './get-scroll';
 import { canScrollWindow } from '../can-scroll';
+import config from './config';
 
 type Args = {|
   viewport: Viewport,
@@ -25,6 +26,7 @@ export default ({
     subject,
     center,
     shouldUseTimeDampening,
+    config,
   });
 
   return scroll && canScrollWindow(viewport, scroll) ? scroll : null;

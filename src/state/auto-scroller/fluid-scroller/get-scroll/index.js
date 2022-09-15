@@ -4,6 +4,7 @@ import { apply, isEqual, origin } from '../../../position';
 import getScrollOnAxis from './get-scroll-on-axis';
 import adjustForSizeLimits from './adjust-for-size-limits';
 import { horizontal, vertical } from '../../../axis';
+import { type AutoScrollConfig } from '../config';
 
 // will replace -0 and replace with +0
 const clean = apply((value: number) => (value === 0 ? 0 : value));
@@ -14,9 +15,11 @@ type Args = {|
   subject: Rect,
   center: Position,
   shouldUseTimeDampening: boolean,
+  config: AutoScrollConfig,
 |};
 
 export default ({
+  config,
   dragStartTime,
   container,
   subject,
@@ -40,18 +43,20 @@ export default ({
   // Maximum speed value should be hit before the distance is 0
   // Negative values to not continue to increase the speed
   const y: number = getScrollOnAxis({
-    container,
     distanceToEdges,
     dragStartTime,
     axis: vertical,
     shouldUseTimeDampening,
+    type: 'vertical',
+    config,
   });
   const x: number = getScrollOnAxis({
-    container,
     distanceToEdges,
     dragStartTime,
     axis: horizontal,
     shouldUseTimeDampening,
+    type: 'horizontal',
+    config,
   });
 
   const required: Position = clean({ x, y });

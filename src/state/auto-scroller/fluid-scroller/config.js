@@ -1,12 +1,32 @@
 // @flow
 
+export type AutoScrollConfig = {
+  maxScrollAtPercentage?: number,
+  maxPixelScroll?: number,
+  topThreshold?: number,
+  bottomThreshold?: number,
+  leftThreshold?: number,
+  rightThreshold?: number,
+  triggerDelay?: number,
+  ease?: (percentage: number) => number,
+  durationDampening?: {
+    stopDampeningAt?: number,
+    accelerateAt?: number,
+  },
+};
+
 // Values used to control how the fluid auto scroll feels
 const config = {
   // percentage distance from edge of container:
-  startFromPercentage: 0.25,
-  maxScrollAtPercentage: 0.05,
+  maxScrollAtPercentage: 0.2,
   // pixels per frame
-  maxPixelScroll: 28,
+  maxPixelScroll: 14,
+  topThreshold: 100,
+  bottomThreshold: 100,
+  leftThreshold: 100,
+  rightThreshold: 100,
+
+  triggerDelay: 500,
 
   // A function used to ease a percentage value
   // A simple linear function would be: (percentage) => percentage;

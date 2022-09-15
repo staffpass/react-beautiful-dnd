@@ -28,6 +28,7 @@ export default ({
   }
 
   const scroll: ?Position = getScroll({
+    config: droppable.descriptor.autoScrollConfig,
     dragStartTime,
     container: frame.pageMarginBox,
     subject,

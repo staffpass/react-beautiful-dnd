@@ -1,12 +1,13 @@
 // @flow
 import { type DistanceThresholds } from './get-distance-thresholds';
 import getPercentage from '../../get-percentage';
-import config from '../../config';
 import minScroll from './min-scroll';
+import { type AutoScrollConfig } from '../../config';
 
 export default (
   distanceToEdge: number,
   thresholds: DistanceThresholds,
+  config: AutoScrollConfig,
 ): number => {
   /*
   // This function only looks at the distance to one edge

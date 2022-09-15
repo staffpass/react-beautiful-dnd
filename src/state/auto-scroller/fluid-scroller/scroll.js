@@ -20,6 +20,10 @@ type Args = {|
   scrollDroppable: (id: DroppableId, scroll: Position) => void,
 |};
 
+let timerId = null;
+let scrollStarted = false;
+let currentDroppableId = null;
+
 export default ({
   state,
   dragStartTime,
@@ -66,7 +70,27 @@ export default ({
     shouldUseTimeDampening,
   });
 
-  if (change) {
+  if (
+    (currentDroppableId && currentDroppableId !== droppable.descriptor.id) ||
+    !change
+  ) {
+    window.clearTimeout(timerId);
+    timerId = null;
+    currentDroppableId = null;
+    scrollStarted = false;
+  }
+
+  if (change && !timerId) {
+    currentDroppableId = droppable.descriptor.id;
+
+    timerId = window.setTimeout(() => {
+      scrollStarted = true;
+      scrollDroppable(droppable.descriptor.id, change);
+    }, droppable.descriptor.autoScrollConfig.triggerDelay);
+    return;
+  }
+
+  if (change && scrollStarted) {
     scrollDroppable(droppable.descriptor.id, change);
   }
 };

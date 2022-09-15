@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   width: 250px;
 `;
 
-const scrollContainerHeight: number = 250;
+const scrollContainerHeight: number = 700;
 
 const DropZone = styled.div`
   /* stop the list collapsing when empty */
@@ -143,6 +143,10 @@ export default function QuoteList(props: Props) {
 
   return (
     <Droppable
+      autoScrollConfig={{
+        topThreshold: 200,
+        bottomThreshold: 200,
+      }}
       droppableId={listId}
       type={listType}
       ignoreContainerClipping={ignoreContainerClipping}

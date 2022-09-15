@@ -8,6 +8,7 @@ import useUniqueContextId, {
   reset as resetContextId,
 } from './use-unique-context-id';
 import { reset as resetUniqueIds } from '../use-unique-id';
+import { type AutoScrollConfig } from '../../state/auto-scroller/fluid-scroller/config';
 
 type Props = {|
   ...Responders,
@@ -21,6 +22,8 @@ type Props = {|
   // See our [sensor api](/docs/sensors/sensor-api.md)
   sensors?: Sensor[],
   enableDefaultSensors?: ?boolean,
+
+  autoScrollConfig?: AutoScrollConfig,
 |};
 
 // Reset any context that gets persisted across server side renders
@@ -46,6 +49,7 @@ export default function DragDropContext(props: Props) {
           dragHandleUsageInstructions={dragHandleUsageInstructions}
           enableDefaultSensors={props.enableDefaultSensors}
           sensors={props.sensors}
+          autoScrollConfig={props.autoScrollConfig}
           onBeforeCapture={props.onBeforeCapture}
           onBeforeDragStart={props.onBeforeDragStart}
           onDragStart={props.onDragStart}

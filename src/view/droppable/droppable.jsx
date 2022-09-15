@@ -45,6 +45,7 @@ export default function Droppable(props: Props) {
     useClone,
     // dispatch props
     updateViewportMaxScroll,
+    autoScrollConfig,
 
     // clone (ownProps)
     getContainerForClone,
@@ -87,6 +88,7 @@ export default function Droppable(props: Props) {
     isCombineEnabled,
     ignoreContainerClipping,
     getDroppableRef,
+    autoScrollConfig,
   });
 
   const placeholder: Node = (

@@ -13,6 +13,7 @@ import type {
 } from '../../types';
 import type { ChildrenFn } from '../draggable/draggable-types';
 import { updateViewportMaxScroll } from '../../state/action-creators';
+import { type AutoScrollConfig } from '../../state/auto-scroller/fluid-scroller/config';
 
 export type DraggableChildrenFn = ChildrenFn;
 
@@ -67,6 +68,7 @@ export type DefaultProps = {|
   renderClone: ?DraggableChildrenFn,
   ignoreContainerClipping: boolean,
   getContainerForClone: () => HTMLElement,
+  autoScrollConfig: AutoScrollConfig,
 |};
 
 export type DispatchProps = {|
