@@ -44,8 +44,6 @@ export default ({
       return;
     }
 
-    invariant(false, 'Jump scroll requested');
-
     jumpScroll(state);
   };
 

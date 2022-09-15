@@ -22,7 +22,8 @@ type Args = {|
 
 let timerId = null;
 let scrollStarted = false;
-let currentDroppableId = null;
+let currentScrollableHeight = null;
+let currentScrollableWidth = null;
 
 export default ({
   state,
@@ -71,17 +72,22 @@ export default ({
   });
 
   if (
-    (currentDroppableId && currentDroppableId !== droppable.descriptor.id) ||
+    (currentScrollableWidth &&
+      currentScrollableHeight &&
+      (currentScrollableWidth !== droppable.frame.scrollSize.scrollWidth ||
+        currentScrollableHeight !== droppable.frame.scrollSize.scrollHeight)) ||
     !change
   ) {
     window.clearTimeout(timerId);
     timerId = null;
-    currentDroppableId = null;
+    currentScrollableWidth = null;
+    currentScrollableHeight = null;
     scrollStarted = false;
   }
 
   if (change && !timerId) {
-    currentDroppableId = droppable.descriptor.id;
+    currentScrollableWidth = droppable.frame.scrollSize.scrollWidth;
+    currentScrollableHeight = droppable.frame.scrollSize.scrollHeight;
 
     timerId = window.setTimeout(() => {
       scrollStarted = true;
