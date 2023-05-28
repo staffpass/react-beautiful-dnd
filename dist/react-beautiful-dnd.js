@@ -9088,6 +9088,7 @@
   };
   var timeForLongPress = 120;
   var forcePressThreshold = 0.15;
+  var shift$1 = 0;
 
   function getWindowBindings(_ref) {
     var cancel = _ref.cancel,
@@ -9120,6 +9121,21 @@
     }, {
       eventName: supportedEventName,
       fn: cancel
+    }, {
+      eventName: 'updateCustomShift',
+      options: {
+        capture: false
+      },
+      fn: function fn(event) {
+        var phase = getPhase();
+
+        if (phase.type !== 'DRAGGING') {
+          cancel();
+          return;
+        }
+
+        shift$1 = event.shift;
+      }
     }];
   }
 
@@ -9145,10 +9161,13 @@
             clientX = _event$touches$.clientX,
             clientY = _event$touches$.clientY;
         var point = {
-          x: clientX,
+          x: clientX + shift$1,
           y: clientY
         };
         event.preventDefault();
+        var customEvent = new Event('dragging');
+        customEvent.touches = event.touches;
+        window.dispatchEvent(customEvent);
         phase.actions.move(point);
       }
     }, {
