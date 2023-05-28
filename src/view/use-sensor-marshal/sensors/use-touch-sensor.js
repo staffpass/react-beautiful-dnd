@@ -48,6 +48,8 @@ const idle: Idle = { type: 'IDLE' };
 export const timeForLongPress: number = 120;
 export const forcePressThreshold: number = 0.15;
 
+let shift = 0;
+
 type GetBindingArgs = {|
   cancel: () => void,
   completed: () => void,
@@ -104,6 +106,22 @@ function getWindowBindings({
       eventName: supportedPageVisibilityEventName,
       fn: cancel,
     },
+    {
+      eventName: 'updateCustomShift',
+      options: {
+        capture: false,
+      },
+      fn: function fn(event) {
+        const phase = getPhase();
+
+        if (phase.type !== 'DRAGGING') {
+          cancel();
+          return;
+        }
+
+        shift = event.shift;
+      },
+    },
   ];
 }
 
@@ -135,7 +153,7 @@ function getHandleBindings({
         const { clientX, clientY } = event.touches[0];
 
         const point: Position = {
-          x: clientX,
+          x: clientX + shift,
           y: clientY,
         };
 
@@ -143,6 +161,9 @@ function getHandleBindings({
         // Also because we are using it as part of a drag we prevent the default action
         // as a sign that we are using the event
         event.preventDefault();
+        const customEvent = new Event('dragging');
+        customEvent.touches = event.touches;
+        window.dispatchEvent(customEvent);
         phase.actions.move(point);
       },
     },
