@@ -93,12 +93,13 @@ export default function getDisplacementGroups({
 
       groups.all.push(id);
 
-      const isVisible: boolean = isPartiallyVisible({
-        target,
-        destination,
-        viewport,
-        withDroppableDisplacement: true,
-      });
+      const isVisible: boolean =
+        isPartiallyVisible({
+          target,
+          destination,
+          viewport,
+          withDroppableDisplacement: true,
+        }) || Boolean(window.reactBeautifulDnDShift);
 
       if (!isVisible) {
         groups.invisible[draggable.descriptor.id] = true;

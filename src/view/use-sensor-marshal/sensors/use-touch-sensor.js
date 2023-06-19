@@ -48,7 +48,7 @@ const idle: Idle = { type: 'IDLE' };
 export const timeForLongPress: number = 120;
 export const forcePressThreshold: number = 0.15;
 
-let shift = 0;
+window.reactBeautifulDnDShift = 0;
 
 type GetBindingArgs = {|
   cancel: () => void,
@@ -119,7 +119,7 @@ function getWindowBindings({
           return;
         }
 
-        shift = event.shift;
+        window.reactBeautifulDnDShift = event.shift;
       },
     },
   ];
@@ -153,7 +153,7 @@ function getHandleBindings({
         const { clientX, clientY } = event.touches[0];
 
         const point: Position = {
-          x: clientX + shift,
+          x: clientX + window.reactBeautifulDnDShift,
           y: clientY,
         };
 
