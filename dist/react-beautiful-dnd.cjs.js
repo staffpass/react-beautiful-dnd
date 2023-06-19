@@ -769,7 +769,7 @@ function getDisplacementGroups(_ref) {
       destination: destination,
       viewport: viewport,
       withDroppableDisplacement: true
-    });
+    }) || Boolean(window.reactBeautifulDnDShift);
 
     if (!isVisible) {
       groups.invisible[draggable.descriptor.id] = true;
@@ -6091,7 +6091,7 @@ var idle$2 = {
 };
 var timeForLongPress = 120;
 var forcePressThreshold = 0.15;
-var shift = 0;
+window.reactBeautifulDnDShift = 0;
 
 function getWindowBindings(_ref) {
   var cancel = _ref.cancel,
@@ -6137,7 +6137,7 @@ function getWindowBindings(_ref) {
         return;
       }
 
-      shift = event.shift;
+      window.reactBeautifulDnDShift = event.shift;
     }
   }];
 }
@@ -6164,7 +6164,7 @@ function getHandleBindings(_ref2) {
           clientX = _event$touches$.clientX,
           clientY = _event$touches$.clientY;
       var point = {
-        x: clientX + shift,
+        x: clientX + window.reactBeautifulDnDShift,
         y: clientY
       };
       event.preventDefault();
