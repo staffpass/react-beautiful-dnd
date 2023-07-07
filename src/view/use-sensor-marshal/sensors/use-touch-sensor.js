@@ -112,13 +112,6 @@ function getWindowBindings({
         capture: false,
       },
       fn: function fn(event) {
-        const phase = getPhase();
-
-        if (phase.type !== 'DRAGGING') {
-          cancel();
-          return;
-        }
-
         window.reactBeautifulDnDShift = event.shift;
       },
     },

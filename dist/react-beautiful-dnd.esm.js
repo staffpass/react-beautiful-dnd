@@ -6123,13 +6123,6 @@ function getWindowBindings(_ref) {
       capture: false
     },
     fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
       window.reactBeautifulDnDShift = event.shift;
     }
   }];
